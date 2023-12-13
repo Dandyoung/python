@@ -2,7 +2,8 @@
 # https://stackoverflow.com/questions/59790948/cant-push-refs-to-remote-try-running-pull-first-to-integrate-your-changes
 
 # PEP 8 스타일(아래가이드)를 따른다면,
-# 1. 
+# 1. 파이썬 커뮤니티와 공통된 스타일을 공유하면, 협업시 도움이 됨
+# 2. 일관성있는 스타일을 사용하면, 자신이 작성한 코드를 쉽게 수정 가능
 
 
 # import문은 한줄에 하나씩.
