@@ -1,3 +1,9 @@
+# 레파지토리 연동 안될때
+# https://stackoverflow.com/questions/59790948/cant-push-refs-to-remote-try-running-pull-first-to-integrate-your-changes
+
+# PEP 8 스타일(아래가이드)를 따른다면,
+# 1. 
+
 
 # import문은 한줄에 하나씩.
 import numpy
@@ -30,4 +36,67 @@ income = (gro_ss
           + dadsad
           + (div - abbb)
           - asdaa)
+
+# 공백을 추가하는것을 피해야하는 상황
+
+# 1. (), {}, [] 바로 안쪽
+# Wrong
+[ 1, 2, lst[ 3 ] ]
+# Correct
+[1, 2, lst[3]]
+
+# 2. 쉽표와 그 뒤에 오는 닫는괄호 사이
+# Wrong
+t = (1, )
+# Correct
+t = (1,)
+
+# 3. 쉽표, 세미콜론, 콜론 바로 앞
+# Wrong
+if x == 3 :
+  return x , y
+# Correct
+if x == 3:
+  return x, y
+
+# 4. 함수 호출 시 인자 목록을 시작하는 여는 괄호 앞
+# Wrong
+func (100)
+# Correct
+func(100)
+
+# 5. 인덱싱이나 슬라이싱을 하는 여는 괄호 바로 앞
+# Wrong
+dct ['key'] = lst [index]
+ 
+# Correct
+dct['key'] = lst[index]
+
+# 6. 연산자끼리 정렬하기 위해 여러개의 공백을 사용
+# Wrong
+x             = 1
+y             = 2
+long_variable = 3
+ 
+# Correct
+x = 1
+y = 2
+long_variable = 3
+
+## 우선 순위가 다른 연산자들을 사용하는 경우, 우선순위가 낮은 연산자 주위에 공백을 사용해야 한다.
+## 연산자의 양쪽에 같은 개수의 공백을 사용해야 한다.
+
+# Wrong
+i=i+1
+total +=1
+x = x * 2 - 1
+result = x * x + y * y
+c = (a + b) * (a - b)
+ 
+# Correct
+i = i + 1
+total += 1
+x = x*2 - 1
+result = x*x + y*y
+c = (a+b) * (a-b)
 
