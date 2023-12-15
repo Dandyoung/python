@@ -232,3 +232,33 @@ print(formatted)
 
 ## 자 이제 진짜 얼마나 짧아졌는지 보자.
 
+for i, (item, count) in enumerate(pantry):
+    old_style = '#%d: %-10s = %d' % (
+        i + 1,
+        item.title(),
+        round(count))
+
+    new_style = '#{}: {:<10s} = {}'.format(
+        i + 1,
+        item.title(),
+        round(count))
+    
+    
+    ## 세줄을 단 한줄로 표현할 수 있다!!
+    f_string = f'#{i+1}: {item.title():<10s} = {round(count)}'
+    
+    assert old_style == new_style == f_string
+    
+
+# 또 해당 형식 지정자를 여러줄로 나눌 수 있는데,
+# 한줄로 쓰는게 더 나아보이는데, 뭐 가독성이 좋다나 뭐라나
+for i, (item, count) in enumerate(pantry):
+    print(f'#{i + 1} '
+          f'{item.title():<10s} = '
+          f'{round(count)}')
+
+# 마지막으로 파이썬 식을 형식 지정자 옵션에 넣을 수도 있다.
+# 이것 좀 맛있네,,
+places = 3
+number = 1.23456
+print(f'내가 고른 숫자는 {number:.{places}f}')
