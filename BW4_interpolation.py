@@ -91,4 +91,94 @@ print(formatted)
 # 딕셔너리의 키는 형식 지정자에 있는 키(예 : %(key)s)와 매치됨.
 
 key = 'my_var'
-value = 
+value = 1.234
+
+old_way = '%-10s = %.2f' % (key, value)
+
+new_way = '%(key)-10s = %(value).2f' %{
+    'key' : key,'value' : value # 원래방식
+}
+
+reordered = '%(key)-10s = %(value).2f' %{
+    'value' : value, 'key' : key # 바꾼 방식
+}
+
+# 전혀 문제없이 돌아간다!
+assert old_way == new_way == reordered
+
+# 첫번째 문제점인, tuple 내 데이터의 값의 순서를 바꾸거나 값의 타입을 바꿔도 된다!
+
+name = '철수'
+template = '%s는 음식을 좋아해. %s가 요리하는 모습을 봐요'
+
+before = template % (name, name) # 튜플
+
+template = '%(name)s는 음식을 좋아해. %(name)s가 요리하는 모습을 봐요'
+after = template % {'name' : name}
+
+assert before == after
+# 같은 키를 지정할 수 있어서 같은 값을 반복하지 않아도 되므로, 
+# 세번째 문제점인, 튜플에서 같은 값을 계속 반복하지 않아도 된다. 
+#  template % {'name' : name}
+
+# 하지만 딕셔너리를 사용하면, 또 다른 문제점이 발생하는데, 
+## 4. 바로 시각적 잡음이 많아진다는 것이다.
+
+for i, (item, count) in enumerate(pantry):
+    before = '#%d: %-10s = %d' % (
+        i + 1,
+        item.title(),
+        round(count))
+
+    # 형식화 식에 딕셔너리를 사용하니 엄청 번잡스러워졌음..
+    # 이것이 바로 네번째 문제점!
+    after = '#%(loop)d: %(item)-10s = %(count)d' % {
+        'loop' : i + 1,
+        'item' : item.title(),
+        'count' : round(count),
+    }
+    
+    assert before == after
+  
+
+# 지금 각 key를 최소 두번(한번은 형식 지정자, 한번은 딕셔너리 key에) 반복한다. 
+# 변수를 세번, 네번까지 써야할 상황이 존재할 수 있음
+
+
+soup = 'lentil'
+formatted = 'Today\'s soup is %(soup)s.' % {'soup' : soup}
+print(formatted)
+
+# 딕셔너리 원소가 많아질수록, 
+# 형식화 문자열이 많아질수록, 
+# 계속 형식화 문자열과, 딕셔너리를 위아래로 훑어보면서 뭐가 뭔지 뒤져야함..
+
+## 따라서 더 나은 방법이 있어야한다!
+
+## 파이썬 3 부터는 %를 사용하는 오래된 c 스타일 형식화 문자열 보다, 더 표현력이 좋은 '고급 문자열 형식화' 기능이 존재!
+
+a = 1234.5678
+# 소수점 두 자리까지 표시하고 천 단위로 쉼표를 추가하여, 부동 소수점 숫자 a를 형식화
+formatted = format(a, ',.2f')
+print(formatted)
+
+b = 'my 문자열'
+# 이는 문자열 b를 너비가 20인 필드 내에서 가운데 정렬
+formatted = format(b, '^20s')
+print ('*', formatted, '*')
+
+# %d와 같은 c스타일 형식화 지정자를 사용하는 대신, 위치 지정자 {}를 사용할 수 있다.
+
+key = 'my_var'
+value = 1.234
+
+# 위치 지정자는 format 메서드에 전달된 인자 중 '순서상' 같은 위치에 있는 인자를 가르킨다.
+formatted = '{} = {}'.format(key, value)
+print(formatted)
+
+# 각 위치 지정자에는 콜론 뒤에 형식 지정자를 붙여넣어 문자열에 값을 넣을때,
+# 어떤 형식으로 변환할지 정할 수 있다.
+
+formatted = '{:<10} = {:.2f}'.format(key, value)
+print(formatted) 
+
